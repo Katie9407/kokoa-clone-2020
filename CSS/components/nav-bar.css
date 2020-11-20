@@ -1,0 +1,89 @@
+.nav{
+    position: fixed;
+    bottom: 0;
+    /* width:100%했을 때 ellipsis아이콘 missing
+    -> box-sizing : border-box로 설정해주니 돌아옴 #6.12
+    :박스사이즈 변경하지말라고 말하는 것 (원래는 패딩 넣은 만큼 
+    내가 원하는 width에서 더 늘어남) */
+    width:100%;
+    background-color: #F9F9FA;
+    padding: 20px 50px;
+    box-sizing: border-box;
+    border-top: 1px solid rgba(46, 46, 46, 0.3)
+}
+
+.nav__list{
+    display:flex;
+    justify-content: space-around;
+    
+}
+
+/* 모든 링크는 default값으로 blue ->reset에 적어주기*/
+.nav__link{
+    color: #2F363e;
+    /* position: absolute는 가장 가까운 relative를 가진 부모를 기준으로 움직이므로 
+    .nav__notification에서 absolute정의할 때 여기에 relative정의해줘야 함 */
+    position: relative;
+}
+
+@keyframes notificationAnimation {
+    0%{
+        transform: none;
+    }
+    50%{
+        transform:translateY(-5px) rotateY(360deg);
+    }
+    100%{
+        transform: none;
+    }
+}
+
+.nav__notification{
+    /* 위에 있는 부분 badge로 따로 빼둠 #6.20-21 */
+    position: absolute;
+    left: 15px;
+    bottom: 15px;
+    animation: notificationAnimation 2s ease-in-out infinite;
+}
+
+/* Homework #6.13 */
+.small{
+    background-color: tomato;
+    width: 5px;
+    height: 5px;
+    border-radius: 2.5px;
+    bottom: 30px;
+    left:30px;
+}
+
+@keyframes appearBtnAnimation{
+    from{
+        opacity:0;
+    }
+    to{
+        transform: none;
+        opacity: 1;
+    }
+}
+
+.nav__btn{
+    transform: translateY(50px);
+    opacity: 0;
+    /* 윗줄 from 에서 여기로 옮겨 적게 되면서 
+    시작부터 모두가 translate되어있는 효과(밑에서 시작) 
+    from에 적게되면 마지막자식은0.8초동안 밑에잇지않고 opacity도 0이 아니라는 것  */
+    animation: appearBtnAnimation 0.3s ease-in-out forwards;
+    /* forwards 적어서 마지막 기억하기 */
+}
+
+.nav__btn:nth-child(2){
+    animation-delay: 0.2s;
+}
+
+.nav__btn:nth-child(3){
+    animation-delay: 0.5s;
+}
+
+.nav__btn:last-child{
+    animation-delay: 0.8s;
+}

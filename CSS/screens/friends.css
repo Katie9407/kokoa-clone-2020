@@ -1,0 +1,71 @@
+#friends-display-link{
+    text-align: center;
+    display: block; /*이거 해줘야 위에 center가 먹힘 . 왜 그런지 알아보기*/
+    background-color:#FAFAFA;
+    padding: 15px 0px;
+    font-size: 18px;
+    margin-bottom: 15px;
+    margin-top:-10px;
+}
+
+#friends-display-link i{
+    /*change the color of the icon : icon is actually just a text(font) so*/
+    color: rgba(0,0,0,0.3);
+}
+
+.friends-screen{
+    padding:0px var(--horizontal-space);
+}
+
+.user-component__avatar--sm{
+    width: 60px;
+    height: 60px;
+    border-radius: 25px;
+}
+
+.user-component__tilte--not-bold{
+    font-weight: 400;
+}
+
+.friends-screen__channel{
+    margin-top:25px;
+    border-top: var(--main-border);
+    padding-top: 10px;
+}
+
+.friends-screen__channel-header{
+    margin-bottom: 30px;
+    display: flex;
+    justify-content: space-between;
+    color: rgba(0,0,0,0.5);
+}
+
+@keyframes hideSplashScreen{
+    from{
+        opacity: 1;
+    }
+    to{
+        opacity: 0;
+        visibility: hidden;
+    }
+}
+
+#splash-screen{
+    background-color: var(--yellow);
+    position:absolute;
+    /* Absolute div puts or aligns itself with closest and relative father
+    in this case : we don't want to have any father.
+    we want to this div align itself with the body */
+    height: 100vh;
+    width: 100vw;
+    top:0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 120px;
+    animation: hideSplashScreen 0.4s ease-in-out forwards;
+    /* opacity 0으로 끝나서 우리눈으로 안보이지만 여전히 거기 있기에 버튼 클릭 안됨
+    ->sol) visibility : hidden 여전히 존재하지만 마우스에 안걸리게 빠져버림
+    html은 여전히 존재 (뭔가를 숨기거나 html에서 삭제 원한다면 JS가 필요 (뇌)*/
+    animation-delay: 2s;
+}

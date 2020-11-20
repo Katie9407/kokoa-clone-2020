@@ -1,0 +1,18 @@
+.badge {
+    /* 밑부분 absolue부분 빼고 notification에 작성해뒀던거 카피해옴 */
+    background-color: tomato;
+    /* span은 높이와 너비 가질 수 없음 
+    display:blcok만들어줘야함. but diplay:flex와 중복되면 neutralize되니까
+    flex쓸 때 지워줘야 flex요소들이 잘 적용됨
+    여기서 display:flex한 이유는 element 1의 부모는 span elemnent이기 때문
+    여기서 1의 위치를 옮기는 것이기 때문*/
+    width:30px;
+    height:30px;
+    /* 사각형->원: 사각형 width의 반을 값으로 쓰면 됨 */
+    border-radius: 15px;
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    font-weight:600;
+}

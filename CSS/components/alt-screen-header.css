@@ -1,0 +1,39 @@
+.alt-header{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    /* 여기서 padding대신 margin줬더니 상태줄이랑 같이 밑으로 내려감..(뭔일?) */
+    padding: var(--horizontal-space);
+    margin-bottom: 15px;
+}
+
+.alt-header__column{
+    width: 33%;
+}
+
+.alt-header__title{
+    font-size: 28px;
+}
+
+/* 이렇게 작성하면 Setting이 정 중앙에 오게됨 (why?)*/
+.alt-header__column:first-child{
+    margin-right: auto;
+}
+
+.alt-header__column:last-child{
+    margin-left: auto;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.alt-header__column span:last-child{
+    margin-left:20px;
+}
+
+.alt-header__column:nth-child(2){
+    text-align: center;
+}
+
+/* 치트키 hcak : absolute이용해서 center오게 하는 건 css 좀 이상한 일
+그래서 모든 열이 같은 너비를 가지게 설정한 것 33%
+가운데 열은 중앙정렬  */

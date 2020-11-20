@@ -1,0 +1,30 @@
+.screen-header{
+    display:flex;
+    justify-content: space-between;
+    padding: var(--horizontal-space);
+    align-items:center;
+    margin-bottom: 15px;
+}
+
+.screen-header__title{
+    font-size: 32px;
+    font-weight: 600;
+}
+
+.screen-header__icons span{
+    margin-left:25px;
+}
+
+@keyframes rotateCog{
+    from{
+        transform: none;
+    }
+    to{
+        transform: rotateZ(360deg)
+    }
+}
+/* 상세하게 적어주는 이유 : 다른 페이지의 cog에서는 적용 x원함 */
+.screen-header__icons .fa-cog:hover{
+    animation: rotateCog 1s linear infinite;
+}
+

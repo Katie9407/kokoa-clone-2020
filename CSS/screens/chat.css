@@ -1,0 +1,222 @@
+#chat-screen{
+    background-color: #ABC1D1;
+    height: 500vh;
+}
+/* 이상한점은 상태바 적기 전에도 상태바는 이미 고정이었음 (헤더만 고정했을 때 ) */
+#chat-screen .alt-header,
+#chat-screen .status-bar{
+    top:0;
+    position:fixed;
+    width: 100%;
+    /* 너비 100%해주고나서야 모여있던거 제자리로 옴 */
+    /* box-sizing:해주고나서야 안보이던 햄버거 아이콘 나타남 */
+    box-sizing: border-box;
+    background-color: #ABC1D1;
+    /* 뒤에 오는 것들이 안보이게 하기 위해서  */
+    /* 배경색 지정->alt-header가 상태바를 가림->sol) z-index속성 이용:
+    : div가 있는 위치가 맨 앞에서부터 몇번째인지를 나타냄 (default:0;)
+    : 클수록 위 레이어이므로 위에 있는 것임
+    : layer의 순서가 몇번째인지를 나타냄 (포샵, 스케치에서 레이어 생각)
+    -display작업하거나, position이 fixed이면 레이어를 갖게 되는 것 
+    :z-index is like a layer. it happens on elements with absolute position
+    or eliments with fixed position */
+    /* #6.29, 6.30  급격히 이해도 떨어짐... */
+}
+
+#chat-screen .status-bar{
+    z-index: 2;
+}
+
+#chat-screen .alt-header{
+    margin-top:10px;
+    z-index: 1;
+}
+@keyframes fadeIn {
+    from{
+        transform: translateY(30px);
+        opacity: 0;
+    }
+    to{
+        transform: none;
+        opacity: 1;
+    }
+}
+
+.main-chat{
+     /* 위에 바 2개가 고정이므로 padding안주고 marging으로 줌  */
+    margin-top: 180px;
+    /* 이것만하면 위에꺼 다 틀어지므로 위2개에 top:0;적어줌으로써 최상단 고정 */
+    /* 날짜가 올라가면서 위2개 위로 가면 안되므로 위2개 바에 배경색 주기  */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    animation: fadeIn 0.8s linear;
+}
+
+.chat__timestamp{
+    color: white;
+    background-color:rosybrown;
+    padding:15px;
+    font-size: 15px;
+    border-radius: 18px;
+    margin-bottom: 25px;
+}
+
+.message-row{
+    width: 100%;
+    display: flex;
+    margin-bottom: 25px;
+}
+
+.message-row img{
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    margin-right:10px;
+    /* padding-right:10px해도 미세하게 비슷...확실히 알기 */
+}
+
+.message__author{
+    display: block;
+    /* 마진쓰려면 스판을 블락으로 바꿔줘야함 */
+    margin-bottom: 5px;
+}
+
+.message__bubble{
+    margin-right:5px;
+    background-color: white;
+    padding:8px 13px;
+    font-size: 18px;
+    border-radius: 15px;
+    border-top-left-radius: 0px;
+    /* 순서 !!! top-left-radius가 뒤에 나와야함. CSS의 특성 생각 */
+    /* Individual corners! */
+}
+
+.message__info{
+    display: flex;
+    align-items: flex-end;
+}
+
+.message__time,
+.message__author{
+    opacity: 0.8;
+    font-size: 15px;
+}
+
+.message-row--own{
+    justify-content: flex-end;
+}
+
+/* modifier의 위력 ! message__bubble 이라는 클래스 추가 설정해서 변경 */
+.message-row--own .message__bubble{
+    background-color: var(--yellow);
+    border-top-right-radius: 0;
+    border-top-left-radius:15px;
+    margin-right:0px;
+    margin-left:5px;
+}
+
+/* order: only works for flex children */
+/* .message-row--own .message__bubble{
+    order:1;
+}
+.message-row--own .message__info{
+    order:0;
+} */
+/* 위처럼 해도 되지만 아래 방법이 더 간단 */
+.message-row--own .message__info{
+    flex-direction: row-reverse;
+}
+
+.reply{
+    position: fixed;
+    bottom: 0;
+    width:100%;
+    background-color: white;
+    display: flex;
+    justify-content: space-between;
+    padding:5px 25px;
+    /* 이 패딩이 element안보이게 하니까 borderbox로 */
+    box-sizing: border-box;
+    align-items: center;
+    transition: transform 0.3s ease-in-out;
+}
+
+.reply .reply-column:first-child{
+    width:10%;
+}
+
+.reply .reply-column:last-child{
+    width:90%;
+    position: relative;
+    /* i와 button 을 input위에 올려두기(absolute)위해서는 부모가 relative어야함 */
+}
+
+.reply i{
+    opacity: 0.5;
+}
+
+.reply input{
+    /* height: 30px; 패딩없으니 대신 패딩을 쓰자 */
+    padding: 10px;
+    /* width: 100%; 적용 x : column이 width안가지고 있음
+    그러므로 column에 width적용 후 적용 가능 */
+    width: 100%;
+    border:var(--main-border);
+    border-radius: 20px;
+
+    transition: all .3s ease-in-out;
+}
+
+/* >i 다이렉트로 안하게되면 버튼내에 있는 i 문제 발생 */
+.reply-column:last-child > i, 
+.reply-column:last-child button{
+    position: absolute;
+    right:-5px;
+    top:4px;
+}
+.reply-column:last-child > i {
+    right:40px;
+    top:10px;
+}
+
+.reply-column button {
+    background-color: var(--yellow);
+    border:none;
+    width:30px;
+    height: 30px;
+    border-radius: 15px;
+}
+
+.reply-column button i{
+    opacity: 1;
+}
+
+.reply-column button:focus,
+.reply-column button:active{
+    outline: none;
+}
+
+.reply .reply-column:first-child,
+.reply .fa-smile-wink,
+.reply button {
+    transition :opacity 0.3s ease-in-out;
+}
+/* if an element is focused inside of reply라는 뜻 */
+.reply:focus-within .reply-column:first-child,
+.reply:focus-within .fa-smile-wink,
+.reply:focus-within button{
+    opacity:0;
+}
+
+.reply:focus-within input{
+    width:95vw;
+    transform:translateX(-10%) translateY(-80px);
+    /* transition설정해서 되는지 체크 (위에 적었음) */
+}
+
+.reply:focus-within {
+    transform: translateY(80px);
+    /* 위에가서 reply에 transition에 적어주기 */
+}
